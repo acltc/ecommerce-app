@@ -10,7 +10,9 @@ class ProductsController < ApplicationController
       @products = @products.order(params[:sort] => params[:direction])
     end
     if params[:category]
-      @products = @products.where(:category => params[:category])
+      category = Category.find_by(:name => params[:category])
+      @products = category.products
+      # @products = Category.find_by(:name => params[:category]).products
     end
     if params[:search]
       @products = @products.where('title LIKE ?', "%" + params[:search] + "%")
