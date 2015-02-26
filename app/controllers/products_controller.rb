@@ -28,4 +28,9 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    flash[:warning] = "Product deleted!"
+    redirect_to '/'
+  end
+
 end

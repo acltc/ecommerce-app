@@ -3,5 +3,9 @@ Rails.application.routes.draw do
   root to: 'products#index'
   get '/products' => 'products#index'
   get '/products/:id' => 'products#show'
-  post '/orders' => 'orders#create'
+  patch '/orders/:id' => 'orders#update'
+  delete 'products/:id' => 'products#destroy'
+
+  get '/carted_products' => 'carted_products#index'
+  post '/carted_products' => 'carted_products#create'
 end

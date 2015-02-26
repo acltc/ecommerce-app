@@ -1,7 +1,8 @@
 class Order < ActiveRecord::Base
-  belongs_to :product
-  belongs_to :product_option
   belongs_to :user
+
+  has_many :carted_products
+  has_many :products, :through => :carted_products
 
   SALES_TAX = 0.09
   
