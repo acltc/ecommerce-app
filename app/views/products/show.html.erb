@@ -29,13 +29,15 @@
   </tr>
 </table>
 
-<%= form_tag "/carted_products" do %>
-  <%= label_tag :quantity %>
-  <%= text_field_tag :quantity %>
+<% if user_signed_in? %>
+  <%= form_tag "/carted_products" do %>
+    <%= label_tag :quantity %>
+    <%= text_field_tag :quantity %>
 
-  <%= hidden_field_tag :product_id, @product.id %>
+    <%= hidden_field_tag :product_id, @product.id %>
 
-  <%= submit_tag "Add To Cart" %>
+    <%= submit_tag "Add To Cart" %>
+  <% end %>
 <% end %>
 
 

@@ -1,13 +1,19 @@
 class CartedProductsController < ApplicationController
+  before_action :authenticate_user! #, :only => [:create]
 
   def index
-    @order = Order.find_by(:user_id => current_user.id, :status => "carted")
-    if @order
-      @carted_products = @order.carted_products
-    else
-      flash[:warning] = "There is nothing in your shopping cart."
-      redirect_to "/"
-    end
+    # if user_signed_in?
+      @order = Order.find_by(:user_id => current_user.id, :status => "carted")
+      if @order
+        @carted_products = @order.carted_products
+      else
+        flash[:warning] = "There is nothing in your shopping cart."
+        redirect_to "/"
+      end
+    # else
+    #   flash[:warning] = "You can't do that, dear friend!"
+    #   redirect_to "/"
+    # end
   end
 
   def create
@@ -22,4 +28,6 @@ class CartedProductsController < ApplicationController
     flash[:success] = "Added to shopping cart!"
     redirect_to '/'
   end
+
+
 end
