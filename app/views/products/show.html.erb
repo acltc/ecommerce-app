@@ -1,6 +1,7 @@
 <h1><%= @product.title %></h1>
 <img src="<%= @product.image %>" width="300">
 <h2><%= number_to_currency(@product.price) %></h2>
+<a href="/products/<%= @product.id %>" data-method="delete" rel="nofollow">Delete</a>
 
 <h3><%= @product.sale_message %></h3>
 
