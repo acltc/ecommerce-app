@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  before_action :authenticate_admin!, :only => [:edit, :destroy]
   def index
     #/products?search=chair
 
@@ -28,6 +29,21 @@ class ProductsController < ApplicationController
     end
   end
 
+  def new
+    @product = Product.new #JUST A PLACEHOLDER!
+  end
+
+  def create
+    @product = Product.new(:title => params[:title], :price => params[:price], :description => params[:description], :image => params[:image])
+    if @product.save
+      flash[:message] = "Product created!"
+      redirect_to "/products/#{@product.id}"
+    else
+      flash[:info] = "Something was wrong with your form"
+      render "new"
+    end
+  end
+
   def edit
     @product = Product.find(params[:id])
   end
@@ -38,5 +54,7 @@ class ProductsController < ApplicationController
     flash[:warning] = "Product deleted!"
     redirect_to '/'
   end
+
+
 
 end
